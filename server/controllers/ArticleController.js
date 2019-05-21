@@ -4,7 +4,7 @@ import Util from '../utils/Utils';
 const util = new Util();
 
 class ArticleController {
-  static async getAllArticles(request, response) {
+  static async getAllArticles(req, res) {
     try {
       const allArticles = await ArticleService.getAllArticles();
       if (allArticles.length > 0) {
@@ -12,36 +12,36 @@ class ArticleController {
       } else {
         util.setSuccess(200, 'No articles found');
       }
-      return util.send(response);
+      return util.send(res);
     } catch (error) {
       util.setError(400, error.message);
-      return util.send(response);
+      return util.send(res);
     }
   }
 
-  static async addArticle(request, response) {
-    const { title, description, body } = request.body;
+  static async addArticle(req, res) {
+    const { title, description, body } = req.body;
     if (!title || !description || !body) {
       util.setError(400, 'Please provide all complete details');
-      return util.send(response);
+      return util.send(res);
     }
 
     try {
       const createdArticle = await ArticleService.addArticle({ title, description, body });
       util.setSuccess(201, 'Article Added!', createdArticle);
-      return util.send(response);
+      return util.send(res);
     } catch (error) {
       util.setError(400, error.message);
-      return util.send(response);
+      return util.send(res);
     }
   }
 
-  static async updateArticle(request, response) {
-    const alteredArticle = request.body;
-    const { id } = request.params;
+  static async updateArticle(req, res) {
+    const alteredArticle = req.body;
+    const { id } = req.params;
     if (!Number(id)) {
       util.setError(400, 'Provide a valid numeric value');
-      return util.send(response);
+      return util.send(res);
     }
     try {
       const updatedArticle = await ArticleService.updateArticle(id, alteredArticle);
@@ -50,18 +50,18 @@ class ArticleController {
       } else {
         util.setSuccess(200, 'Article updated', updatedArticle);
       }
-      return util.send(response);
+      return util.send(res);
     } catch (error) {
       util.setError(400, error.message);
-      return util.send(response);
+      return util.send(res);
     }
   }
 
-  static async getArticle(request, response) {
-    const { id } = request.params;
+  static async getArticle(req, res) {
+    const { id } = req.params;
     if (!Number(id)) {
       util.setError(400, 'Please provide a valid ID');
-      return util.send(response);
+      return util.send(res);
     }
 
     try {
@@ -73,19 +73,19 @@ class ArticleController {
         util.setSuccess(200, 'Found Article', theArticle);
       }
 
-      return util.send(response);
+      return util.send(res);
     } catch (error) {
       util.setError(400, error.message);
-      return util.send(response);
+      return util.send(res);
     }
   }
 
-  static async deleteArticle(request, response) {
-    const { id } = request.params;
+  static async deleteArticle(req, res) {
+    const { id } = req.params;
 
     if (!Number(id)) {
       util.setError(400, 'Please provide a numeric value');
-      return util.send(response);
+      return util.send(res);
     }
 
     try {
@@ -96,10 +96,10 @@ class ArticleController {
       } else {
         util.setError(404, `Article with the id ${id} cannot be found`);
       }
-      return util.send(response);
+      return util.send(res);
     } catch (error) {
       util.setError(400, error);
-      return util.send(response);
+      return util.send(res);
     }
   }
 }
