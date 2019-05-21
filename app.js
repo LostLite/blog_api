@@ -20,8 +20,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // Register use of router
 app.use('/api/v1/articles', articleRoutes);
 
-app.get('*', (req, res) => {
-  return res.status(200).send({ message: 'Welcome to myBlog API.' });
+app.get('*', (request, response) => {
+  return response.status(200).send({ message: 'Welcome to myBlog API.' });
 });
 
 app.listen(port, console.log(`Server running at port: ${port}`));
