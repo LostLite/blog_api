@@ -13,6 +13,16 @@ env:
   global:
   - NODE_ENV=test
 
+addons:
+  code_climate:
+    repo_token:
+      secure: "AIw6vvf/ULatt7EvNAIlRB62Z0MvH4k95FE97gszLZLhYEyh372ktBetxw+z733q7jmC/3R+3mxk6bsnvXiDU7625zi5sYcpbzS2WuLuSSB9KIH41xZyZUTjvJUlgP
+8XrbQXpG1P+wZI/NneL6ALebxqibKo/15FLrjBoroqeTBdcOrDuj8VtEn5YehTzJk5u0PxpY7jxjjc2jESJeXio52zr+MdqqvE7N2e8aNjjR1vyc7+CM01A8/cZmlpp/2dDkd0FH8
+wDd35P3RPFK8NA9b5W5BZj4oDvV2Ka875+vhBLiUDP/ASB/XcmtQrPEd8BQCDWZgxX91GSUSeYejwKQ3TdFAAy5bgMpS8V/k7Bc2SZKyb2yqGQo+k1LClztTKKpSCsGEhEArtvtzx
+JTt6xoF7YtIYf5JTWQQffJgbwpBYwW09773mJ6a767xiwnF8fIItYYw7PvUa2jLxy+olIAkkPfQ2ql2TIBhC6MIYlcMRmH653qYRgWWUMbijmy+MvmC6loWk8xG34bqhgKdQln3IX
+xDn2Yt5nuNuk0CQdhDFtXzFA1ZIIr1Zp8ZsypIhZ2caPCUgERJ8KSMkGDAT3wKAg73ELGmcejv+lmr8z87f8+1M7hSRq83LhBsg3nD2Abhb1OyLKUk85LRq8YUo41a3rMFSwvks46
+IusEPzuyA="
+
 before_script:
   - psql -c 'create database myblog_test;' -U postgres
   - psql -c 'CREATE USER "ke-william" WITH PASSWORD null;' -U postgres
