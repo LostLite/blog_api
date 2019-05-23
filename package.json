@@ -8,9 +8,13 @@
     "codeclimate-coverage": "codeclimate-test-reporter < lcov.info",
     "coverage": "npm test && npm run generate-lcov && npm run coveralls-coverage && npm run codeclimate-coverage",
     "coveralls-coverage": "coveralls < lcov.info",
+    "db:reset": "npm run migrate:undo && npm run migrate && npm run seed",
     "generate-lcov": "nyc report --reporter=text-lcov > lcov.info",
-    "test": "export NODE_ENV=test &&  sequelize db:migrate:undo:all  && sequelize db:migrate  && nyc --require @babel/register mocha ./server/test/test.js --timeout 20000 --exit",
-    "start": "nodemon --exec babel-node app.js"
+    "migrate": "sequelize db:migrate",
+    "migrate:undo": "sequelize db:migrate:undo:all",
+    "seed": "sequelize db:seed:all",
+    "start": "nodemon --exec babel-node app.js",
+    "test": "export NODE_ENV=test &&  sequelize db:migrate:undo:all  && sequelize db:migrate  && nyc --require @babel/register mocha ./server/test/test.js --timeout 20000 --exit"
   },
   "author": "",
   "license": "ISC",
